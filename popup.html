@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/style.css">
+  <title>通貨変換</title>
+</head>
+<body>
+  <h1>通貨変換</h1>
+  
+  <label for="amount">金額を入力してください。</label>
+  <input type="text" id="amount" placeholder="例: 100">
+  
+  <label for="currency">入力した金額の変換前の通貨</label>
+  <select id="currency">
+    <option value="USD_JPY">$ (USD)</option>
+    <option value="EUR_JPY">€ (EUR)</option>
+    <option value="GBP_JPY">£ (GBP)</option>
+    <option value="AUD_JPY">A$ (AUD)</option>
+    <option value="CAD_JPY">C$ (CAD)</option>
+    <option value="CHF_JPY">CHF (CHF)</option>
+    <option value="TRY_JPY">₺ (TRY)</option>
+    <option value="ZAR_JPY">ZAR (ZAR)</option>
+    <option value="MXN_JPY">MX$ (MXN)</option>
+  </select>
+  
+  <label for="roundSwitch">小数点切り捨て:</label>
+  <input type="checkbox" id="roundSwitch" checked>
+
+  <button id="convert">変換する</button>
+  
+  <p id="conversion"></p>
+  <script src="popup.js"></script>
+</body>
+</html>
