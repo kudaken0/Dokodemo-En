@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="css/style.css">
-  <title>通貨変換</title>
+  <title>どこでも円</title>
 </head>
 <body>
-  <h1>通貨変換</h1>
+  <h1>どこでも円</h1>
   
   <label for="amount">金額を入力してください。</label>
   <input type="text" id="amount" placeholder="例: 100">
@@ -24,12 +24,12 @@
     <option value="MXN_JPY">MX$ (MXN)</option>
   </select>
   
-  <label for="roundSwitch">小数点切り捨て:</label>
+  <label for="roundSwitch" style="margin-left: 90px;">小数点を切り捨てる</label>
   <input type="checkbox" id="roundSwitch" checked>
 
   <button id="convert">変換する</button>
-  
   <p id="conversion"></p>
+  <label>ver. 1.1.0</label>
   <script src="popup.js"></script>
 </body>
 </html>

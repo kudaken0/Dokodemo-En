@@ -54,7 +54,12 @@ p {
   font-weight: bold;
   text-align: center;
   color: #333;
+  max-height: 100px; /* 最大高さを指定 */
+  overflow-y: auto; /* 必要に応じて縦スクロールを有効にする */
+  padding-right: 10px; /* スクロールバーのスペース確保 */
+  box-sizing: content-box; /* パディングがスクロール領域に影響しないようにする */
 }
+
 
 .toggle-container {
   display: flex;
@@ -112,3 +117,5 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(20px);
 }
+
+
