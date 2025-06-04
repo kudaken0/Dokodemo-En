@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "どこでも円",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "リアルタイムで現在の為替レートを取得しそれに基づき日本円に変換します。",
   "permissions": ["contextMenus", "activeTab", "scripting"],
   "background": {

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="css/style.css" />
   <title>どこでも円</title>
 </head>
 <body>
   <h1>どこでも円</h1>
-  
+
   <label for="amount">金額を入力してください。</label>
-  <input type="text" id="amount" placeholder="例: 100">
-  
+  <input type="text" id="amount" placeholder="例: 100" />
+
   <label for="currency">入力した金額の変換前の通貨</label>
   <select id="currency">
     <option value="USD_JPY">$ (USD)</option>
@@ -23,13 +23,20 @@
     <option value="ZAR_JPY">ZAR (ZAR)</option>
     <option value="MXN_JPY">MX$ (MXN)</option>
   </select>
-  
-  <label for="roundSwitch" style="margin-left: 90px;">小数点を切り捨てる</label>
-  <input type="checkbox" id="roundSwitch" checked>
+
+  <div id="form-area">
+    <div id="switch-area">
+      <label for="round-switch">小数点を切り捨てる</label>
+      <input type="checkbox" id="round-switch" checked />
+    </div>
+  </div>
+
+  <div id="conversion-output"></div>
 
   <button id="convert">変換する</button>
   <p id="conversion"></p>
-  <label>ver. 1.1.0</label>
+  <label>ver. 1.1.1</label>
+
   <script src="popup.js"></script>
 </body>
 </html>

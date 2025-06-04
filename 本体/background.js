@@ -3,7 +3,7 @@ chrome.runtime.onInstalled.addListener((details) => {
   chrome.contextMenus.removeAll(() => {
     chrome.contextMenus.create({
       id: "convertCurrency",
-      title: "選択した金額を日本円に変換",
+      title: "どこでも円",
       contexts: ["selection"]
     });
   });
