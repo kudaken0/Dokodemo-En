@@ -1,5 +1,4 @@
 chrome.runtime.onInstalled.addListener((details) => {
-  // コンテキストメニューの設定
   chrome.contextMenus.removeAll(() => {
     chrome.contextMenus.create({
       id: "convertCurrency",
@@ -10,9 +9,9 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 
 
-  // インストール時に特定のページを開く
+
   if (details.reason === "install") {
-    chrome.tabs.create({ url: "https://tool.kudaken.com/rate?config=thank" }); // 開きたいページのURLを指定します
+    chrome.tabs.create({ url: "https://dokodemo-en.kudaken.com/?config=thank" });
   }
 });
 
