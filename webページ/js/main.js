@@ -1,51 +1,95 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const features = document.querySelectorAll(".feature");
-    const ctaBtn = document.querySelector(".cta-btn");
+        document.addEventListener('DOMContentLoaded', () => {
+            // スクロールアニメーション
+            const faders = document.querySelectorAll('.fade-in-section');
+            if (faders.length > 0) {
+                const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+                const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) return;
+                        entry.target.classList.add('is-visible');
+                        appearOnScroll.unobserve(entry.target);
+                    });
+                }, appearOptions);
+                faders.forEach(fader => appearOnScroll.observe(fader));
+            }
 
-    // Fade-in effect for each feature
-    features.forEach((feature, index) => {
-        setTimeout(() => {
-            feature.style.opacity = "1";
-        }, index * 300);
-    });
+            // ヒーローセクションのアニメーション (ホームページ表示時のみ)
+            const animationContainer = document.getElementById('animation-container');
+            if (animationContainer) {
+                const selection = document.getElementById('text-selection');
+                const targetPrice = document.getElementById('target-price');
+                const icon = document.getElementById('fake-icon');
+                const popup = document.getElementById('fake-popup');
+                const cursor = document.getElementById('fake-cursor');
+                const browserBody = document.querySelector('.browser-body');
+                const browserHeader = document.querySelector('.browser-header');
 
-    // Click fade-out effect for button
-    ctaBtn.addEventListener("click", () => {
-        ctaBtn.style.transition = "opacity 0.5s ease";
-        ctaBtn.style.opacity = "0";
-        setTimeout(() => {
-            ctaBtn.style.opacity = "1";
-        }, 500);
-    });
-});
+                if (!selection || !targetPrice || !icon || !popup || !cursor || !browserBody) return;
 
-// JavaScript for slider functionality
-let currentIndex = 0;
-const sliderWrapper = document.querySelector('.slider-wrapper');
-const images = document.querySelectorAll('.usage-image');
-const prevBtn = document.querySelector('.prev-btn');
-const nextBtn = document.querySelector('.next-btn');
-const description = document.querySelector('.usage-description');
+                const runAnimation = () => {
+                    selection.style.transition = 'none';
+                    selection.style.width = '0px';
+                    popup.classList.remove('show');
+                    icon.style.transform = 'scale(1)';
+                    cursor.style.transition = 'none';
+                    cursor.style.opacity = '0';
+                    cursor.style.transform = 'scale(1)';
 
-const descriptions = [
-    'Step 1',
-    'Step 2',
-    'Step 3'
-];
+                    const priceRect = targetPrice.getBoundingClientRect();
+                    const bodyRect = browserBody.getBoundingClientRect();
+                    const headerRect = browserHeader.getBoundingClientRect();
+                    const iconRect = icon.getBoundingClientRect();
 
-description.textContent = descriptions[currentIndex];
+                    const priceStartX = priceRect.left - bodyRect.left;
+                    const priceStartY = priceRect.top - bodyRect.top + (priceRect.height / 2);
+                    const iconTargetX = iconRect.left - bodyRect.left + (iconRect.width / 2);
+                    const iconTargetY = (headerRect.top - bodyRect.top) + (headerRect.height / 2);
 
-function updateSlider() {
-    sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-    description.textContent = descriptions[currentIndex];
-}
+                    selection.style.left = `${priceStartX}px`;
+                    selection.style.top = `${priceRect.top - bodyRect.top}px`;
+                    selection.style.height = `${priceRect.height}px`;
 
-prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    updateSlider();
-});
+                    setTimeout(() => {
+                        cursor.style.left = `${priceStartX - 10}px`;
+                        cursor.style.top = `${priceStartY - 10}px`;
+                        cursor.style.opacity = '1';
+                        cursor.style.transition = 'left 1s ease, top 1s ease, opacity 0.5s ease';
+                    }, 500);
+                    setTimeout(() => {
+                        selection.style.transition = 'width 0.8s ease-out';
+                        selection.style.width = `${priceRect.width}px`;
+                        cursor.style.transition = 'left 0.8s ease-out';
+                        cursor.style.left = `${priceStartX + priceRect.width - 10}px`;
+                    }, 1600);
+                    setTimeout(() => {
+                        cursor.style.transition = 'left 0.7s ease-in-out, top 0.7s ease-in-out';
+                        cursor.style.left = `${iconTargetX}px`;
+                        cursor.style.top = `${iconTargetY}px`;
+                    }, 2600);
+                    setTimeout(() => {
+                        cursor.style.transform = 'scale(0.8)';
+                        icon.style.transform = 'scale(1.15)';
+                        popup.classList.add('show');
+                    }, 3400);
+                    setTimeout(() => {
+                        cursor.style.transform = 'scale(1)';
+                        icon.style.transform = 'scale(1)';
+                        popup.classList.remove('show');
+                    }, 4800);
+                    setTimeout(() => {
+                        cursor.style.opacity = '0';
+                    }, 5300);
+                };
 
-nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % images.length;
-    updateSlider();
-});
+                const heroObserver = new IntersectionObserver((entries) => {
+                    let animationInterval;
+                    if(entries[0].isIntersecting){
+                        runAnimation();
+                        animationInterval = setInterval(runAnimation, 5800);
+                    } else {
+                        clearInterval(animationInterval);
+                    }
+                });
+                heroObserver.observe(animationContainer);
+            }
+        });
