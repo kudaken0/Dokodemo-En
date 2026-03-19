@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>どこでも円 - 設定</title>
+  <link rel="stylesheet" href="css/options_style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>どこでも円の設定</h1>
+
+    <fieldset class="setting-group">
+      <legend>ポップアップ表示設定</legend>
+      
+      <div class="setting-item-container">
+        <div class="setting-item">
+          <span class="setting-label">選択時に自動表示</span>
+          <label class="switch">
+            <input type="checkbox" id="auto-popup-switch">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <p class="setting-desc">テキストをマウスで選択した瞬間に、その場に換算結果を表示します。</p>
+      </div>
+    
+      <div id="popup-sub-settings">
+        <div class="setting-item-container">
+          <div class="setting-item">
+            <span class="setting-label">Altキー押した時のみ表示</span>
+            <label class="switch">
+              <input type="checkbox" id="alt-key-switch">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <p class="setting-desc">ONにすると、Altキーを押しながら選択した時だけポップアップが出ます。</p>
+        </div>
+    
+        <div class="setting-item-container">
+          <div class="setting-item">
+            <span class="setting-label">不透明度</span>
+            <input type="range" id="opacity-range" min="0.1" max="1.0" step="0.1">
+          </div>
+          <p class="setting-desc">ポップアップの透け具合を調整します。値を下げると後ろの文字が透けて見えます。</p>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="setting-group">
+      <legend>外観設定</legend>
+      <div class="setting-item-container">
+        <div class="setting-item">
+          <span class="setting-label">ダークモード</span>
+          <label class="switch">
+            <input type="checkbox" id="dark-mode-switch">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <p class="setting-desc">設定画面とポップアップの色を暗い配色に変更します。</p>
+      </div>
+    </fieldset>
+
+    <fieldset class="setting-group">
+      <legend>除外リスト</legend>
+      <div class="setting-item-container" style="flex-direction: column; align-items: flex-start;">
+        <span class="setting-label">除外サイト (1行に1ドメイン)</span>
+        <textarea id="exclude-list" rows="3" placeholder="example.com"></textarea>
+        <p class="setting-desc">ここで指定したドメインのサイト内では、ポップアップが一切表示されなくなります。</p>
+      </div>
+    </fieldset>
+
+    <button id="save" class="save-btn">設定を保存</button>
+    <div id="status" class="status"></div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
