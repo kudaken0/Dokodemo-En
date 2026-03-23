@@ -1,97 +1,361 @@
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 0%, rgba(240, 244, 255, 1) 0%, rgba(255, 255, 255, 0) 50%);
-        }
-        /* アニメーション用スタイル */
-        #animation-container {
-            position: relative;
-            height: 200px;
-        }
-        #fake-browser {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 500px;
-            height: 160px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid #e5e7eb;
-            overflow: hidden;
-        }
-        .browser-header {
-            height: 28px;
-            background-color: #f3f4f6;
-            display: flex;
-            align-items: center;
-            padding: 0 10px;
-            border-bottom: 1px solid #e5e7eb;
-            position: relative;
-        }
-        .dot { height: 8px; width: 8px; border-radius: 50%; margin-right: 6px; }
-        .browser-body { padding: 15px; font-size: 14px; position: relative; }
-        #text-selection {
-            position: absolute;
-            background-color: #3b82f6;
-            opacity: 0.3;
-            height: 1.2em;
-        }
-        #fake-icon {
-            position: absolute;
-            top: 2px;
-            right: 10px;
-            width: 24px;
-            height: 24px;
-            background: #e0e7ff;
-            border-radius: 5px;
-            cursor: pointer;
-            padding: 2px;
-            transition: transform 0.2s ease;
-        }
-        #fake-icon:hover { transform: scale(1.1); }
-        #fake-popup {
-            position: absolute;
-            top: 35px;
-            right: 5px;
-            width: 150px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            border: 1px solid #e5e7eb;
-            padding: 10px;
-            text-align: center;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            z-index: 20;
-        }
-        #fake-popup.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        #fake-cursor {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            z-index: 30;
-            pointer-events: none;
-            opacity: 0;
-            transition: transform 0.1s ease;
-            color: #1f2937;
-        }
-        /* スクロールアニメーション */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+@import url('https://fonts.googleapis.com/css2?family=LINE+Seed+JP&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+/* コンテンツ全体の要素を中央に寄せる */
+#normal-content, #thank-you-content {
+    text-align: center;
+    width: 100%;
+}
+
+#thank-you-content h2, 
+#thank-you-content p {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px; 
+}
+
+#thank-you-content .custom-card {
+    margin: 20px auto; 
+}
+
+p {
+  font-family: "LINE Seed JP", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+h1, h2, h3 {
+  font-family: "LINE Seed JP", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-weight: bold;
+}
+
+a {
+  font-family: "LINE Seed JP", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ヘッダーのスタイル */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  background-color: #ffffff;
+  z-index: 1000;
+  /* 影の変化を滑らかにする */
+  transition: box-shadow 0.3s ease, height 0.3s ease;
+}
+
+/* ロゴ画像の設定 */
+.logo {
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+/* スクロール時に付与されるクラス */
+header.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  height: 70px;
+}
+
+/* スマホ用の調整 */
+@media (max-width: 768px) {
+  header {
+    height: 60px;
+  }
+  header.scrolled {
+    height: 55px;
+  }
+}
+
+.title {
+    padding: 100px 20px;
+    text-align: center;
+}
+
+/*ボタンの形状*/
+.float1{
+    border: 1px solid #000000;
+    color: #333;
+    padding:10px 20px;
+    display: inline-block;
+    text-decoration: none; 
+    outline: none;
+    transition: all .3s;
+}
+
+/*hoverをしたらボックスに影がつく*/
+.float1:hover {
+  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.3);
+  border-color: transparent;
+}
+
+.custom-card {
+  width: 90%;           
+  max-width: 600px;     
+  margin: 20px auto;    
+
+  /* --- 角丸と影の設定 --- */
+  border-radius: 20px; 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
+  
+  /* --- はみ出し防止 --- */
+  overflow: hidden;    
+  background-color: #fff;
+}
+
+
+.custom-card-img {
+  width: 100%;         
+  height: auto;        
+  display: block;      
+  object-fit: cover;   
+}
+
+/* 全体の外枠 */
+.container {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ボックス本体 */
+.info-box {
+  background-color: #ffffff;
+  border-radius: 16px;   
+  padding: 25px;
+  display: flex;
+  align-items: center;     
+  gap: 20px;               
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  
+
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* ホバー時の演出 */
+.info-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* アイコンエリア */
+.icon-area {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;         
+  background-color: #f0f4f8; 
+  border-radius: 12px;      
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;           
+  font-size: 24px;
+}
+
+/* テキストエリア */
+.text-area h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.2rem;
+  color: #2d3748;
+}
+
+.text-area p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+/* --- レスポンシブ (PC版) --- */
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;   
+  }
+
+  .info-box {
+    flex: 1;                
+    flex-direction: column; 
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .icon-area {
+    margin-bottom: 10px;
+  }
+}
+
+footer a {
+  color: #4b5564;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #000;
+}
+
+footer {
+    background-color: #a6a6a6;
+}
+
+
+hr {
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  margin: auto;
+}
+
+.footer {
+  padding: 2rem;
+  font-size: 15px;
+  color: #4b5564;
+  background: #fff;
+}
+
+.footer__navi-heading {
+  font-weight: 600;
+}
+
+
+
+.footer__navi li {
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .md-flex {
+    display: flex;
+  }
+
+  .md-justify-between {
+    justify-content: space-between;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* --- 全体のレイアウト --- */
+.faq-container {
+  max-width: 800px; /* PCでの最大幅 */
+  margin: 40px auto;
+  padding: 0 15px; /* スマホ時の余白 */
+}
+
+/* 各質問ボックス */
+.faq-item {
+  background-color: #fff;
+  border: 1px solid #e0e0e0; 
+  border-radius: 8px;     
+  margin-bottom: 12px;
+  overflow: hidden;         
+  
+  /*  ボックスに影をつける */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+  transition: all 0.3s ease;
+}
+
+/* アクティブ時の影を少し強調 */
+.faq-item.active {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* --- ヘッダー --- */
+.faq-header {
+  width: 100%;
+  padding: 20px 25px;
+  display: flex;
+  align-items: center; 
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+}
+
+/* 開閉アイコン  */
+.faq-icon {
+  width: 20px;
+  font-size: 1.1rem;
+  color: #555;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+
+.faq-item.active .faq-icon {
+  color: #333;
+}
+
+/* 質問タイトル */
+.faq-title {
+  flex: 1; 
+  font-size: 1rem;
+  color: #333;
+  font-weight: normal; 
+  line-height: 1.4;
+}
+
+/* コンテンツ (初期状態は隠す) */
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background-color: #f6f6f6;
+}
+
+/* グレー背景の中のテキスト部分 */
+.content-inner {
+  padding: 20px 25px; 
+  color: #444;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* --- スマホ用の調整 --- */
+@media (max-width: 768px) {
+  .faq-header {
+    padding: 18px 20px;
+  }
+  .content-inner {
+    padding: 18px 20px;
+  }
+  .faq-title {
+    font-size: 0.95rem;
+  }
+}
