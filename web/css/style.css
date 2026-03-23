@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=LINE+Seed+JP&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=LINE+Seed+JP:400, 700&display=swap');
 
 body {
   margin: 0;
@@ -35,10 +35,9 @@ h1, h2, h3 {
   font-family: "LINE Seed JP", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-weight: bold;
 }
 
-a {
+a, span{
   font-family: "LINE Seed JP", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -345,6 +344,9 @@ hr {
   color: #444;
   line-height: 1.6;
   font-size: 0.95rem;
+  font-family: "LINE Seed JP", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* --- スマホ用の調整 --- */
